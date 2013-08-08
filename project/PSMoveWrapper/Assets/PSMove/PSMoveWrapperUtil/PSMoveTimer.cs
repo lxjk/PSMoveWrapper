@@ -32,7 +32,7 @@ public class PSMoveTimer : MonoBehaviour {
 	
 	public void AddTimer(float time, System.Action<object> callback, object param) {
 		CountdownTimer timer = new CountdownTimer();
-		timer.Start(time, TimesUp);
+		timer.Start(time, TimesUp, null, null);
 		timers[timer] = new CallbackStruct(callback, param);;
 	}
 	
@@ -81,17 +81,17 @@ public class CountdownTimer {
         _defaultInterval = defaltInterval;
     }
 
-    public void Start(Action<CountdownTimer> finishCallback = null, Action<float> updateCallback = null, Action<float> intervalCallback = null)
+    public void Start(Action<CountdownTimer> finishCallback, Action<float> updateCallback, Action<float> intervalCallback)
     {
         Start(_defaultTimeLimit, finishCallback, updateCallback, intervalCallback);
     }
 
-    public void Start(float timeLimit, Action<CountdownTimer> finishCallback = null, Action<float> updateCallback = null, Action<float> intervalCallback = null)
+    public void Start(float timeLimit, Action<CountdownTimer> finishCallback, Action<float> updateCallback, Action<float> intervalCallback)
     {
         Start(timeLimit, _defaultInterval, finishCallback, updateCallback, intervalCallback);
     }
 
-    public void Start(float timeLimit, float interval, Action<CountdownTimer> finishCallback = null, Action<float> updateCallback = null, Action<float> intervalCallback = null)
+    public void Start(float timeLimit, float interval, Action<CountdownTimer> finishCallback, Action<float> updateCallback, Action<float> intervalCallback)
     {
         _finishCallback = finishCallback;
         _updateCallback = updateCallback;
